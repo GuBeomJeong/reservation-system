@@ -45,12 +45,7 @@ public class MainController {
 	public String myreservation(Model model) {
 		return "myreservation";
 	}
-	
-	@GetMapping("/detail")
-	public String detail(Model model) {
-		return "detail";
-	}
-	
+		
 	@GetMapping
 	public String index(Model model) {
 		return "mainpage";

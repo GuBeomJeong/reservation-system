@@ -18,16 +18,16 @@ import java.util.Map;
 
 @Repository
 public class CategoryDao {
-    private NamedParameterJdbcTemplate jdbc; // sql 을 실행하기 위해 사용되는 객체
-    private SimpleJdbcInsert insertAction; // insert 를 편리하게 하기 위한 객체
-    private RowMapper<Category> rowMapper = BeanPropertyRowMapper.newInstance(Category.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
+    private NamedParameterJdbcTemplate jdbc; 
+    private SimpleJdbcInsert insertAction; 
+    private RowMapper<Category> rowMapper = BeanPropertyRowMapper.newInstance(Category.class); 
 
-    // Spring은 생성자를 통하여 주입을 하게 된다.
+   
     public CategoryDao(DataSource dataSource) {
-        this.jdbc = new NamedParameterJdbcTemplate(dataSource); // Datasource를 주입
-        this.insertAction = new SimpleJdbcInsert(dataSource)  // Datasource를 주입
-                .withTableName("category")   // table명을 지정
-                .usingGeneratedKeyColumns("id"); // pk 칼럼을 지정
+        this.jdbc = new NamedParameterJdbcTemplate(dataSource); 
+        this.insertAction = new SimpleJdbcInsert(dataSource)  
+                .withTableName("category")   
+                .usingGeneratedKeyColumns("id"); 
     }
 
     public int insert(Category category){

@@ -1,12 +1,12 @@
 $list = $("#category_list");
 
-var category = (function(){
+var Category = (function(){
 
 	return {
 		 deleteData:function(){
 
 			$parent = $(this).parent();
-			var id = $parent.attr('id');
+			var id = $parent.attr('id'); // 수정
 			var URL = "http://localhost:8080/api/categories/"+id;
 
 			$.ajax({
@@ -45,5 +45,5 @@ var category = (function(){
 })();
 
 
-$list.on("click",".del",category.deleteData);
-$list.on("click",".update",category.updateData);
+$list.on("click",".del",Category.deleteData);
+$list.on("click",".update",Category.updateData);

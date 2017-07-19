@@ -16,28 +16,40 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import kr.or.connect.jgb.domain.Product;
+import kr.or.connect.jgb.domain.ProductImage;
+import kr.or.connect.jgb.domain.vo.ProductDetailVO;
 import kr.or.connect.jgb.domain.vo.ProductMainVO;
 
 @Repository
 public class ProductDao {
 	private NamedParameterJdbcTemplate jdbc; // sql 을 실행하기 위해 사용되는 객체
     private SimpleJdbcInsert insertAction; // insert 를 편리하게 하기 위한 객체
+    private SimpleJdbcInsert imageInsertAction; 
+ 
     private RowMapper<Product> rowMapper = BeanPropertyRowMapper.newInstance(Product.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
-    private RowMapper<ProductMainVO> mainRowMapper = BeanPropertyRowMapper.newInstance(ProductMainVO.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
+    private RowMapper<ProductMainVO> mainVORowMapper = BeanPropertyRowMapper.newInstance(ProductMainVO.class); 
+    private RowMapper<ProductDetailVO> detailVORowMapper = BeanPropertyRowMapper.newInstance(ProductDetailVO.class); 
 
-    // Spring은 생성자를 통하여 주입을 하게 된다.
-    // DbConfig에서 bean으로 등록한 dataSource()를 찾아서 넣어준다. DataSource가 하나뿐이기 때문에
-    // dataSource1로 해도 실행이 되지만 만약 또 다른 DataSource가 bean에 등록되면 변수 이름을 맞춰줘야 한다.
+    
+    
     public ProductDao(DataSource dataSource) {
-        this.jdbc = new NamedParameterJdbcTemplate(dataSource); // Datasource를 주입
-        this.insertAction = new SimpleJdbcInsert(dataSource)  // Datasource를 주입
-                .withTableName("product")   // table명을 지정
-                .usingGeneratedKeyColumns("id"); // pk 칼럼을 지정
+        this.jdbc = new NamedParameterJdbcTemplate(dataSource); 
+        this.insertAction = new SimpleJdbcInsert(dataSource)  
+                .withTableName("product")   
+                .usingGeneratedKeyColumns("id"); 
+        this.imageInsertAction = new SimpleJdbcInsert(dataSource)
+                .withTableName("product_image") 
+                .usingGeneratedKeyColumns("id"); 
     }
 
     public int insert(Product product){
         SqlParameterSource params = new BeanPropertySqlParameterSource(product);
         return insertAction.executeAndReturnKey(params).intValue();
+    }
+    
+    public int insertImage(ProductImage productImage){
+        SqlParameterSource params = new BeanPropertySqlParameterSource(productImage);
+        return imageInsertAction.executeAndReturnKey(params).intValue();
     }
 
     public Product selectById(int id){
@@ -58,17 +70,23 @@ public class ProductDao {
     
     public List<ProductMainVO> selectAll(int page) {
     	Map<String, Object> params = new HashMap<>();
-    	params.put("limit", 5);
-    	params.put("offset", 5*(page-1));
+    	params.put("limit", 10);
+    	params.put("offset", 10*(page-1));
     	
-    	return jdbc.query(ProductSqls.SELECT_ALL,params,mainRowMapper);
+    	return jdbc.query(ProductSqls.SELECT_ALL,params,mainVORowMapper);
     }
     
     public List<ProductMainVO> selectAllByCategory(int categoryId,int page){
     	Map<String, Object> params = new HashMap<>();
         params.put("category_id", categoryId);
-        params.put("limit", 5);
-    	params.put("offset", 5*(page-1));
-    	return jdbc.query(ProductSqls.SELECT_ALL_BY_CATEGORY,params,mainRowMapper);
+        params.put("limit", 10);
+    	params.put("offset", 10*(page-1));
+    	return jdbc.query(ProductSqls.SELECT_ALL_BY_CATEGORY,params,mainVORowMapper);
+    }
+    
+    public ProductDetailVO selectDetailById(int productId) {
+    	Map<String, Object> params = new HashMap<>();
+        params.put("id", productId);
+        return jdbc.queryForObject(ProductSqls.SELECT_DETAIL_BY_ID,params,detailVORowMapper);
     }
 }

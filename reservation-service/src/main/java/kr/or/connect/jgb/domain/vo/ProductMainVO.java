@@ -1,10 +1,24 @@
 package kr.or.connect.jgb.domain.vo;
 
 public class ProductMainVO {
+	int id;
 	String name;
 	String placeName;
-	String event;
+	String description;
+	String fileId;
 	
+	public String getFileId() {
+		return fileId;
+	}
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -17,11 +31,11 @@ public class ProductMainVO {
 	public void setplaceName(String placeName) {
 		this.placeName = placeName;
 	}
-	public String getEvent() {
-		return event;
+	public String getDescription() {
+		return description;
 	}
-	public void setEvent(String event) {
-		this.event = event;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

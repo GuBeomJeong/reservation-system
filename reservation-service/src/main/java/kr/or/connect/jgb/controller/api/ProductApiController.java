@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import kr.or.connect.jgb.domain.Product;
+import kr.or.connect.jgb.domain.vo.ProductDetailVO;
 import kr.or.connect.jgb.domain.vo.ProductMainVO;
 import kr.or.connect.jgb.service.ProductService;
 
@@ -31,15 +32,20 @@ public class ProductApiController {
 	private ProductService productService;
 	
 	@GetMapping("/categories/{categoryId}/pages/{page}")
-	public Collection<ProductMainVO> category(@PathVariable int categoryId,@PathVariable int page) {
+	public List<ProductMainVO> category(@PathVariable int categoryId,@PathVariable int page) {
 		
 		return productService.getAllByCategory(categoryId,page);
 	}
 	
 	@GetMapping("/pages/{page}")
-	public Collection<ProductMainVO> list(@PathVariable int page) {
+	public List<ProductMainVO> list(@PathVariable int page) {
 		
 		return productService.getAll(page);
+	}
+	
+	@GetMapping("/{productId}")
+	public ProductDetailVO product(@PathVariable int productId) {
+		return productService.getDetail(productId);
 	}
 	
 	
