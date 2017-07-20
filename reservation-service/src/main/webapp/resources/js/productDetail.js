@@ -4,6 +4,12 @@ var ProductDetail = (function(){
     var productDetail;
     var imageItems;
     var rollingCount=0;
+    var commentImages =[
+
+    ];
+
+    var commentImageSource = $("#comment_image_template").html();
+    var commentImageTemplate = Handlebars.compile(commentImageSource);
 
     function makeProductDetail(i){
         return {"name":productDetail.name,
@@ -76,15 +82,17 @@ var ProductDetail = (function(){
                   for(var i=0;i<imageItems.length;i++){
                         productDetailData.item.push(makeProductDetail(i));
                   }
-                  productDetailData.item.push(makeProductDetail(0));
+                  productDetailData.item.push(makeProductDetail(0));  // 양쪽 이미지를 하나씩더 붙이기 위함
+
                   var html = productDetailTemplate(productDetailData);
-                  $(".visual_img").append(html);
+                  $(".main .visual_img").append(html);
                   $("#content").text(productDetail.content);
                   $("#event_info").text(productDetail.event);
                   $(".btn_goto_home").attr("href",productDetail.homepage);
                   $("#size").text(imageItems.length);
                   $("#comment_avg").text(productDetail.commentAverage);
                   $("#comment_count").text(productDetail.commentCount);
+                  $("#comment_graph_value").css("width",(productDetail.commentAverage * 20) + "%")
                   $("#addr").text(productDetail.placeStreet);
                   $("#addr_old").text(productDetail.placeLot);
                   $("#store_tel").text(productDetail.tel);
@@ -113,7 +121,9 @@ var ProductDetail = (function(){
                   var commentItem;
 
                   for(var i=0;i<data.length;i++){
+                      commentImages[i] = data[i].filesId;
                       commentData.item.push({
+                          "index" : i,
                           "comment" : data[i].comment,
                           "score" : data[i].score,
                           "date" : data[i].createDate,
@@ -125,6 +135,7 @@ var ProductDetail = (function(){
 
                   var html = commentTemplate(commentData);
                   $(".list_short_review").append(html);
+                  $(".comment_image_popup").on("click",ProductDetail.clickImagePopup);
               }
           });
       },
@@ -148,7 +159,75 @@ var ProductDetail = (function(){
       clickMoreDetail : function(){
           $(this).css("display","none");
           $(this).siblings("a").css("display","");
-      }
+      },
+      clickImagePopup : function(e){
+
+        e.preventDefault();
+
+        var $element = $("#comment_image_layer");
+        var $list = $element.find(".visual_img");
+
+        $list.css("left",0);
+        $list.empty();
+
+
+        var index = $(this).data("index");
+        console.log(index);
+
+
+        var commentImageData = {
+            "commentImageItem": [
+
+            ]
+        };
+
+        var fileList = commentImages[index];
+
+        for(var i=0;i<fileList.length;i++){
+            commentImageData.commentImageItem.push({"fileId":fileList[i]});
+        }
+        console.log(commentImageData);
+
+        var detailRollingSize = Rolling.getRollingSize(); // 나중에 component로 바꿔서 유연하게 사용해야함
+        var detailRollingCount = Rolling.getRollingCount(); // detailImage 번호 기억
+        Rolling.setRollingSize(fileList.length-1);  // 지금은 모듈이라 이렇게 사용..
+        Rolling.setRollingCount(0);
+
+        //isDim ? $('.dim-layer').fadeIn() : $element.fadeIn();
+        $element.fadeIn();
+
+        $element.css("top", Math.max(0, (($(window).height() - $element.outerHeight()) / 2) + $(window).scrollTop()) + "px");
+        $element.css("left", Math.max(0, (($(window).width() - $element.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+
+        var html = commentImageTemplate(commentImageData);
+        $list.append(html);
+
+        $element.on("click",".btn_prev",function(){
+          if(!Rolling.getRollingFlag()){
+              Rolling.preRolling(414,$element,0);
+          }
+        });
+
+        $element.on("click",".btn_nxt",function(){
+          if(!Rolling.getRollingFlag()){
+              Rolling.nxtRolling(414,$element,0);
+          }
+        });
+
+        $element.find('a.btn-layerClose').click(function(){
+            //isDim ? $('.dim-layer').fadeOut() : $el.fadeOut();
+            $element.fadeOut();
+            Rolling.setRollingSize(detailRollingSize);
+            Rolling.setRollingCount(detailRollingCount); // 아까 기억해 놓은 detail의 정보들 다시 적용
+            return false;
+        });
+
+        // $('.layer .dimBg').click(function(){
+        //     $('.dim-layer').fadeOut();
+        //     return false;
+        // });
+
+    }
   }
 
 

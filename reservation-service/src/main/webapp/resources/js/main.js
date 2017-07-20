@@ -7,21 +7,21 @@ $(document).ready(function() {
 	Product.loadCategory();
 
     $(document).scroll(Product.loadProductScroll);
-                
+
 });
 
 $(".event_tab_lst.tab_lst_min").on("click","li",Product.categoryShow);
-Rolling.intervalRolling();
+Rolling.intervalRolling(338,$(".event"),1);
 
-$(".btn_pre_e").on("click",function(){
+$(".event .btn_pre_e").on("click",function(){
   if(!Rolling.getRollingFlag()){
-      Rolling.preRolling(338);
-      Rolling.timeoutRolling();
+      Rolling.preRolling(338,$(".event"),1);
+      Rolling.timeoutRolling(338,$(".event"),1);
   }
 });
-$(".btn_nxt_e,.nxt_fix").on("click",function(){
+$(".event .btn_nxt_e,.nxt_fix").on("click",function(){
   if(!Rolling.getRollingFlag()){
-      Rolling.nxtRolling(338);
-      Rolling.timeoutRolling();
+      Rolling.nxtRolling(338,$(".event"),1);
+      Rolling.timeoutRolling(338,$(".event"),1);
   }
 });

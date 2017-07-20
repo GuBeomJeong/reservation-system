@@ -1,10 +1,10 @@
 package kr.or.connect.jgb.domain;
 
 public class ProductImage {
-	int id;
-	int productId;
-	int fileId;
-	int type;
+	private int id;
+	private int productId;
+	private int fileId;
+	private int type;
 	
 	public ProductImage(int productId,int fileId) {
 		this.productId = productId;

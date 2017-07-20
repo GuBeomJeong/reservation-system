@@ -2,15 +2,15 @@ package kr.or.connect.jgb.domain;
 
 
 public class Files {
-	int id;
-	int userId;
-	String fileName;
-	String saveFileName;
-	int fileLength;
-	String contentType;
-	int deleteFlag;
-	String createDate;
-	String endDate;
+	private int id;
+	private int userId;
+	private String fileName;
+	private String saveFileName;
+	private int fileLength;
+	private String contentType;
+	private int deleteFlag;
+	private String createDate;
+	private String endDate;
 	
 	public Files() {
 		

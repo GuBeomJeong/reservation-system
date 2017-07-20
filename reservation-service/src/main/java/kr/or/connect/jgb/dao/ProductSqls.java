@@ -9,7 +9,7 @@ public class ProductSqls {
 			+ "limit :limit offset :offset";
 	final static String SELECT_ALL_BY_CATEGORY = 
 			"select p.id,name,place_name,description,i.file_id" + 
-			"from product p,display_info d,product_image i" + 
+			"from product p,display_info d,product_image i " + 
 			"where p.id = d.product_id and p.id = i.product_id "
 			+ "and p.category_id = :category_id "
 			+ "group by p.id "

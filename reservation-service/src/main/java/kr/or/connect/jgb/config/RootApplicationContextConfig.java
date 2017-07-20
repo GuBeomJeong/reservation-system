@@ -7,8 +7,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @ComponentScan(basePackages = {
 		"kr.or.connect.jgb.dao",
-		"kr.or.connect.jgb.service"
-		
+		"kr.or.connect.jgb.service"	
 })
 @Import({DbConfig.class})
 public class RootApplicationContextConfig {

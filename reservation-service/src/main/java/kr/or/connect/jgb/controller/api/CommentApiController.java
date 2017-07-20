@@ -1,6 +1,7 @@
 package kr.or.connect.jgb.controller.api;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class CommentApiController {
 	CommentService commentService;
 	
 	@GetMapping("/products/{productId}")
-	public Collection<CommentVO> comments(@PathVariable int productId){
+	public List<CommentVO> comments(@PathVariable int productId){
 		return commentService.getThreeByProduct(productId);
 	}
 }

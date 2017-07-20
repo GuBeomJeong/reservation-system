@@ -72,8 +72,11 @@ public class ProductServiceImpl implements ProductService {
 		ProductDetailVO detailVO = productDao.selectDetailById(productId);
 		detailVO.setfilesId(fileDao.selectByProduct(productId));
 		CommentCountAvgDTO CCA = commentDao.selectConuntAverageByProduct(productId);
+	
+		
 		detailVO.setCommentAverage(CCA.getAverage());
 		detailVO.setCommentCount(CCA.getCount());
+		
 		return detailVO;
 	}
 	

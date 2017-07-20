@@ -20,7 +20,7 @@
                     <a href="/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                     <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="/myreservation" class="btn_my"> <span title="내 예약">MY</span> </a>
+                <a href="/login" class="btn_my" id = "naver_id_login"> <span title="내 예약">MY</span> </a>
             </header>
         </div>
         <hr>
@@ -167,6 +167,8 @@
 
 <script src="/resources/js/libs/jquery.min.js"></script>
 <script src="/resources/js/libs/handlebars-v4.0.10.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+
 
 <script src="/resources/js/rolling.js"></script>
 <script src="/resources/js/product.js"></script>

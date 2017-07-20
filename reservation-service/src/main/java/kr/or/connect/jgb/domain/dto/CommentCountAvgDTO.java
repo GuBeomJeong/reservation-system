@@ -13,8 +13,12 @@ public class CommentCountAvgDTO {
 	public double getAverage() {
 		return average;
 	}
-	public void setAverage(double average) {
-		this.average = average;
+	public void setAverage(Double average) {
+		if(average == null) {
+			this.average = 0;
+		}else {
+			this.average = Math.round(average * 100) / 100.0;
+		}
 	}
 	
 

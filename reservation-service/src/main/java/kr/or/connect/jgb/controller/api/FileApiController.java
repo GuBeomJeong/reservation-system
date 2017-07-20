@@ -1,6 +1,7 @@
 package kr.or.connect.jgb.controller.api;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ public class FileApiController {
 	FileService fileService;
 	
 	@GetMapping("/products/{productId}")
-	public Collection<Integer> files(@PathVariable int productId){
+	public List<Integer> files(@PathVariable int productId){
 		return fileService.getByProduct(productId);
 	}
 }

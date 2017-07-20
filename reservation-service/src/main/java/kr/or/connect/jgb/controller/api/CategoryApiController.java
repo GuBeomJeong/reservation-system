@@ -30,7 +30,7 @@ public class CategoryApiController {
 	private CategoryService categoryService;
 	
 	@GetMapping
-	public Collection<Category> list(HttpServletRequest req,HttpServletResponse res) {
+	public List<Category> list(HttpServletRequest req,HttpServletResponse res) {
 		return categoryService.getAll();
 	}
 	

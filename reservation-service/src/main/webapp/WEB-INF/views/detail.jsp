@@ -111,7 +111,7 @@
                         <div class="short_review_area">
                             <div class="grade_area">
                                 <!-- [D] 별점 graph_value는 퍼센트 환산하여 width 값을 넣어줌 -->
-                                <span class="graph_mask"> <em class="graph_value" style="width: 84%;"></em> </span>
+                                <span class="graph_mask"> <em class="graph_value" id ="comment_graph_value" style="width: 84%;"></em> </span>
                                 <strong class="text_value"> <span id ="comment_avg">4.2</span> <em class="total">5.0</em> </strong>
                                 <span class="join_count"><em class="green" id = "comment_count">52건</em> 등록</span>
                             </div>
@@ -122,7 +122,7 @@
                                         <div>
                                             <div class="review_area">
                                                 <div class="thumb_area">
-                                                    <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="http://localhost:8080/files/{{fileId}}" alt="리뷰이미지"> </a> <span class="img_count">{{imageCount}}</span>                                                </div>
+                                                    <a href="#" class ="comment_image_popup" class="thumb" title="이미지 크게 보기" data-index="{{index}}"> <img width="90" height="90" class="img_vertical_top" src="http://localhost:8080/files/{{fileId}}" alt="리뷰이미지"> </a> <span class="img_count">{{imageCount}}</span>                                                </div>
                                                 <h4 class="resoc_name">{{productName}}</h4>
                                                 <p class="review">{{comment}}</p>
                                             </div>
@@ -223,6 +223,49 @@
         </div>
     </footer>
     <div id="photoviwer"></div>
+
+
+    <div id="comment_image_layer" class="pop-layer">
+        <div class="pop-container">
+            <div class="pop-conts">
+                <div class="group_visual">
+                    <div>
+                        <div class="container_visual" style="width: 414px;">
+                            <ul class="visual_img">
+                                <script id="comment_image_template" type="text/x-handlebars-template">
+                                    {{#commentImageItem}}
+                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="http://localhost:8080/files/{{fileId}}"> <span class="img_bg"></span>
+
+                                    </li>
+                                    {{/commentImageItem}}
+                                </script>
+                            </ul>
+                        </div>
+                        <div class="prev">
+                            <div class="prev_inn">
+                                <a class="btn_prev" title="이전">
+                                    <!-- [D] 첫 이미지 이면 off 클래스 추가 -->
+                                    <i class="spr_book2 ico_arr6_lt off"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="nxt">
+                            <div class="nxt_inn">
+                                <a class="btn_nxt" title="다음">
+                                    <i class="spr_book2 ico_arr6_rt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-r">
+                    <a href="#" class="btn-layerClose">Close</a>
+                </div>
+                <!--// content-->
+            </div>
+        </div>
+    </div>
+
 </body>
 
 <script src="/resources/js/libs/jquery.min.js"></script>
