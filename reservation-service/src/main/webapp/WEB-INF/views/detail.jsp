@@ -230,12 +230,12 @@
             <div class="pop-conts">
                 <div class="group_visual">
                     <div>
-                        <div class="container_visual" style="width: 414px;">
+                        <div class="container_visual" style="width: 600px;">
                             <ul class="visual_img">
                                 <script id="comment_image_template" type="text/x-handlebars-template">
                                     {{#commentImageItem}}
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="http://localhost:8080/files/{{fileId}}"> <span class="img_bg"></span>
-
+                                    <li class="item" style="width: 600px;"> <img alt="" class="img_thumb" src="http://localhost:8080/files/{{fileId}}">
+                                        <span class="img_bg"></span>
                                     </li>
                                     {{/commentImageItem}}
                                 </script>

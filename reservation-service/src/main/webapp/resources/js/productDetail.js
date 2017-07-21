@@ -98,7 +98,9 @@ var ProductDetail = (function(){
                   $("#store_tel").text(productDetail.tel);
                   drawMap();
 
-                  Rolling.setRollingSize(imageItems.length-1);
+                  var rolling = new Rolling($(".main"),1,0);
+                  rolling.init(".btn_prev",".btn_nxt");
+
               }
           });
       },
@@ -188,11 +190,6 @@ var ProductDetail = (function(){
         }
         console.log(commentImageData);
 
-        var detailRollingSize = Rolling.getRollingSize(); // 나중에 component로 바꿔서 유연하게 사용해야함
-        var detailRollingCount = Rolling.getRollingCount(); // detailImage 번호 기억
-        Rolling.setRollingSize(fileList.length-1);  // 지금은 모듈이라 이렇게 사용..
-        Rolling.setRollingCount(0);
-
         //isDim ? $('.dim-layer').fadeIn() : $element.fadeIn();
         $element.fadeIn();
 
@@ -202,23 +199,12 @@ var ProductDetail = (function(){
         var html = commentImageTemplate(commentImageData);
         $list.append(html);
 
-        $element.on("click",".btn_prev",function(){
-          if(!Rolling.getRollingFlag()){
-              Rolling.preRolling(414,$element,0);
-          }
-        });
-
-        $element.on("click",".btn_nxt",function(){
-          if(!Rolling.getRollingFlag()){
-              Rolling.nxtRolling(414,$element,0);
-          }
-        });
+        var rolling = new Rolling($element,0,0);
+        rolling.init(".btn_prev",".btn_nxt");
 
         $element.find('a.btn-layerClose').click(function(){
             //isDim ? $('.dim-layer').fadeOut() : $el.fadeOut();
             $element.fadeOut();
-            Rolling.setRollingSize(detailRollingSize);
-            Rolling.setRollingCount(detailRollingCount); // 아까 기억해 놓은 detail의 정보들 다시 적용
             return false;
         });
 
