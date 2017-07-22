@@ -1,6 +1,7 @@
 var ReservationMain = (function () {
     var lastProductId = 0;
     var categoryId = 0;
+    var scrollLock = 1;
 
     var $left_box = $("#left_event_box");
     var $right_box = $("#right_event_box");
@@ -44,7 +45,7 @@ var ReservationMain = (function () {
     }
 
     function loadProductsByCategory(){
-
+        scrollLock =1;
         if(categoryId){
             var URL = "http://localhost:8080/api/products/categories/"+categoryId+"/pages/"+lastProductId;
         }
@@ -56,8 +57,11 @@ var ReservationMain = (function () {
             contentType:"application/json",
             type: "get",
             success : function(data){
-                lastProductId = data[data.length-1].id;
-                drawProductsByCategory(data);
+                if(data.length) {
+                    lastProductId = data[data.length - 1].id;
+                    drawProductsByCategory(data);
+                    scrollLock = 0;
+                }
             }
         });
     }
@@ -76,7 +80,7 @@ var ReservationMain = (function () {
         var maxHeight = $(document).height();
         var currentScroll = $(window).scrollTop() + $(window).height();
 
-        if (maxHeight <= currentScroll + 100) {
+        if (maxHeight <= currentScroll + 100 && scrollLock === 0 ) {
             loadProductsByCategory();
         }
     }
@@ -116,6 +120,7 @@ var ReservationMain = (function () {
             loadCategory();
 
             $(document).scroll(loadProductByScroll);
+
 
             var rolling = new Rolling($(".event"),1,1);
             rolling.applyBtn(".btn_pre_e",".btn_nxt_e,.nxt_fix");
