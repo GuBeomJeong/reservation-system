@@ -36,8 +36,8 @@
                     <div class="pagination">
                         <div class="bg_pagination"></div>
                         <div class="figure_pagination">
-                            <span class="num" id ="num">1</span>
-                            <span class="num off" >/ <span id="size">3</span></span>
+                            <span class="num" id ="image_num">1</span>
+                            <span class="num off" >/ <span id="image_size">3</span></span>
                         </div>
                     </div>
                     <div class="group_visual">
@@ -230,11 +230,11 @@
             <div class="pop-conts">
                 <div class="group_visual">
                     <div>
-                        <div class="container_visual" style="width: 600px;">
+                        <div class="container_visual" style="width: 414px;">
                             <ul class="visual_img">
                                 <script id="comment_image_template" type="text/x-handlebars-template">
                                     {{#commentImageItem}}
-                                    <li class="item" style="width: 600px;"> <img alt="" class="img_thumb" src="http://localhost:8080/files/{{fileId}}">
+                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="http://localhost:8080/files/{{fileId}}">
                                         <span class="img_bg"></span>
                                     </li>
                                     {{/commentImageItem}}

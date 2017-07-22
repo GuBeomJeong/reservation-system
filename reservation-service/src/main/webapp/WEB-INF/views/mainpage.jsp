@@ -41,7 +41,7 @@
                         <div>
                             <div class="container_visual">
                                 <!-- [D] 이전,다음 버튼을 클릭할때마다 캐러셀 형태로 순환 됨 --->
-                                <ul class="visual_img">
+                                <ul class="visual_img" style="left:-338px">
                                     <li class="item" style="background-image: url(http://cfile3.uf.tistory.com/image/2624114F54B3BE251F7023); width: 338px;">
                                         <a href="/detail"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
                                             <div class="event_txt">
@@ -153,25 +153,23 @@
 <!-- [D] lst_event_box 가 2컬럼으로 좌우로 나뉨, 더보기를 클릭할때마다 좌우 ul에 li가 추가됨 -->
 {{#item}}
 <li class="item">
-<a href="/products/{{id}}" class="item_book">
-    <div class="item_preview"> <img alt="" class="img_thumb" src="http://localhost:8080/files/{{fileId}}"><span class="img_border"></span> </div>
-    <div class="event_txt">
-        <h4 class="event_txt_tit"> <span>{{name}}</span> <small class="sm">{{placeName}}</small> </h4>
-        <p class="event_txt_dsc">{{description}}
-        </p>
-    </div>
-</a>
+    <a href="/products/{{id}}" class="item_book">
+        <div class="item_preview"> <img alt="" class="img_thumb" src="http://localhost:8080/files/{{fileId}}"><span class="img_border"></span> </div>
+        <div class="event_txt">
+            <h4 class="event_txt_tit"> <span>{{name}}</span> <small class="sm">{{placeName}}</small> </h4>
+            <p class="event_txt_dsc">{{description}}
+            </p>
+        </div>
+    </a>
 </li>
 {{/item}}
 </script>
 
 <script src="/resources/js/libs/jquery.min.js"></script>
 <script src="/resources/js/libs/handlebars-v4.0.10.js"></script>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-
 
 <script src="/resources/js/rolling.js"></script>
-<script src="/resources/js/product.js"></script>
+<script src="/resources/js/reservationMain.js"></script>
 <script src="/resources/js/main.js"></script>
 
 

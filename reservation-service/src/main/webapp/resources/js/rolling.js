@@ -40,8 +40,8 @@ Rolling.prototype = {
             }
         }.bind(this));
     },
-    offBtn : function(){
-        this.base.off("click");
+    offRolling : function(){
+        this.base.off("");
     },
     timeoutRolling : function (){
         clearInterval(this.intervalId);
