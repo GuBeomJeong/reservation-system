@@ -9,7 +9,9 @@ $(document).ready(function() {
     $(document).scroll(Product.loadProductScroll);
 
     var rolling = new Rolling($(".event"),1,1);
-    rolling.init(".btn_pre_e",".btn_nxt_e,.nxt_fix");
+    rolling.applyBtn(".btn_pre_e",".btn_nxt_e,.nxt_fix");
+    rolling.intervalRolling();
+
 
 });
 

@@ -99,7 +99,8 @@ var ProductDetail = (function(){
                   drawMap();
 
                   var rolling = new Rolling($(".main"),1,0);
-                  rolling.init(".btn_prev",".btn_nxt");
+                  rolling.applyBtn(".btn_prev",".btn_nxt");
+                  rolling.applyFlicking();
 
               }
           });
@@ -119,7 +120,7 @@ var ProductDetail = (function(){
                       item : [
 
                       ]
-                  }
+                  };
                   var commentItem;
 
                   for(var i=0;i<data.length;i++){
@@ -200,11 +201,12 @@ var ProductDetail = (function(){
         $list.append(html);
 
         var rolling = new Rolling($element,0,0);
-        rolling.init(".btn_prev",".btn_nxt");
+        rolling.applyBtn(".btn_prev",".btn_nxt");
 
         $element.find('a.btn-layerClose').click(function(){
             //isDim ? $('.dim-layer').fadeOut() : $el.fadeOut();
             $element.fadeOut();
+            rolling.offBtn();
             return false;
         });
 

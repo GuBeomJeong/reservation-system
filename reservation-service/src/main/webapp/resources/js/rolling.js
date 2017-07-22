@@ -16,7 +16,7 @@ var Rolling = function(base,cycleFlag,timeoutFlag){
 
 Rolling.prototype.constructor = Rolling;
 Rolling.prototype = {
-    init : function(pre,nxt){
+    applyBtn : function(pre,nxt){
 
         this.base.on("click",pre,function(){
             if(!this.rollingFlag){
@@ -24,8 +24,8 @@ Rolling.prototype = {
                 if(this.timeoutFlag) {
                     this.timeoutRolling();
                 }else {
-                    ProductDetail.updateRollingCount(0);
-                } // 임시로 해놓은 것
+                    ProductDetail.updateRollingCount(0); // 임시로 해놓은 것
+                }
             }
         }.bind(this));
 
@@ -35,14 +35,13 @@ Rolling.prototype = {
                 if(this.timeoutFlag) {
                     this.timeoutRolling();
                 }else {
-                    ProductDetail.updateRollingCount(1);
+                    ProductDetail.updateRollingCount(1); // 임시로 해놓은 것
                 }
             }
         }.bind(this));
-
-        if(this.timeoutFlag){
-            this.intervalRolling();
-        }
+    },
+    offBtn : function(){
+        this.base.off("click");
     },
     timeoutRolling : function (){
         clearInterval(this.intervalId);
@@ -114,6 +113,72 @@ Rolling.prototype = {
                 }.bind(this)
             });
         }
+    },
+    applyFlicking : function(){
+        var flicking = new Flicking(this);
+        flicking.init();
     }
 
+};
+
+var Flicking = function(rolling){
+
+    this.touchStart_x = 0;
+    this.touchStart_y = 0;
+    this.move_dx = 0;
+    this.rolling = rolling;
+
+};
+
+Flicking.prototype.constructor = Flicking;
+Flicking.prototype = {
+    init: function(){
+
+        $(this.rolling.base).on("touchstart",".visual_img",this.start.bind(this));
+        $(this.rolling.base).on("touchmove",".visual_img",this.move.bind(this));
+        $(this.rolling.base).on("touchend",".visual_img",this.end.bind(this));
+    },
+    start : function(e){
+
+        if ( e.type === 'touchstart' && e.originalEvent.touches.length === 1 ) {
+            this.touchStart_x = e.originalEvent.touches[ 0 ].pageX;
+            this.touchStart_y = e.originalEvent.touches[ 0 ].pageY;
+        }
+
+    },
+    move : function(e){
+        var drag_dist = 0;
+        var scroll_dist = 0;
+
+        if ( e.type === 'touchmove' && e.originalEvent.touches.length === 1 ) {
+            drag_dist = e.originalEvent.touches[ 0 ].pageX - this.touchStart_x;
+            scroll_dist = e.originalEvent.touches[ 0 ].pageY - this.touchStart_y;
+            this.move_dx = ( drag_dist / this.rolling.width ) * 100;
+
+
+            if ( Math.abs( drag_dist ) > Math.abs( scroll_dist ) ) {
+
+                // ... move slide element
+
+                e.preventDefault( );
+            }
+        }
+    },
+    end : function(e){
+        if ( e.type === 'touchend' && e.originalEvent.touches.length === 0 ) {
+
+            if ( this.move_dx  > 40 ) {
+                this.rolling.preRolling();
+
+            } else if(this.move_dx < 40){
+                this.rolling.nxtRolling();
+            }
+
+            this.touchStart_y = 0;
+            this.touchStart_x = 0;
+            this.move_dx = 0;
+
+            e.preventDefault( );
+        }
+    }
 };
