@@ -37,15 +37,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductMainVO> getAllByCategory(int categoryId,int page) {
+	public List<ProductMainVO> getAllByCategory(int categoryId,int lastProductId) {
 		// TODO Auto-generated method stub
-		return productDao.selectAllByCategory(categoryId,page);
+		return productDao.selectAllByCategory(categoryId,lastProductId);
 	}
 
 	@Override
-	public List<ProductMainVO> getAll(int page) {
+	public List<ProductMainVO> getAll(int lastProductId) {
 		// TODO Auto-generated method stub
-		return productDao.selectAll(page);
+		return productDao.selectAll(lastProductId);
 	}
 
 	@Override

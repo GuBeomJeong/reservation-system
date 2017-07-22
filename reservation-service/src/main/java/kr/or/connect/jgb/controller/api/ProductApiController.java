@@ -31,16 +31,16 @@ public class ProductApiController {
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping("/categories/{categoryId}/pages/{page}")
-	public List<ProductMainVO> category(@PathVariable int categoryId,@PathVariable int page) {
+	@GetMapping("/categories/{categoryId}/pages/{lastProductId}")
+	public List<ProductMainVO> category(@PathVariable int categoryId,@PathVariable int lastProductId) {
 		
-		return productService.getAllByCategory(categoryId,page);
+		return productService.getAllByCategory(categoryId,lastProductId);
 	}
 	
-	@GetMapping("/pages/{page}")
-	public List<ProductMainVO> list(@PathVariable int page) {
+	@GetMapping("/pages/{lastProductId}")
+	public List<ProductMainVO> list(@PathVariable int lastProductId) {
 		
-		return productService.getAll(page);
+		return productService.getAll(lastProductId);
 	}
 	
 	@GetMapping("/{productId}")

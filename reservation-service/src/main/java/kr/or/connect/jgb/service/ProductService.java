@@ -10,8 +10,8 @@ import kr.or.connect.jgb.domain.vo.ProductMainVO;
 
 public interface ProductService {
 	public Product get(int id);
-	public List<ProductMainVO> getAllByCategory(int id,int page);
-	public List<ProductMainVO> getAll(int page);
+	public List<ProductMainVO> getAllByCategory(int id,int lastProductId);
+	public List<ProductMainVO> getAll(int lastProductId);
     public Product addProduct(Product product);
     public ProductDetailVO getDetail(int productId);
     public int delete(int id);

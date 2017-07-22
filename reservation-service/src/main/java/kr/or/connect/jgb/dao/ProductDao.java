@@ -68,19 +68,19 @@ public class ProductDao {
         return jdbc.update(ProductSqls.DELETE_BY_ID, params);
     }
     
-    public List<ProductMainVO> selectAll(int page) {
+    public List<ProductMainVO> selectAll(int lastProductId) {
     	Map<String, Object> params = new HashMap<>();
     	params.put("limit", 10);
-    	params.put("offset", 10*(page-1));
+    	params.put("last_id", lastProductId);
     	
     	return jdbc.query(ProductSqls.SELECT_ALL,params,mainVORowMapper);
     }
     
-    public List<ProductMainVO> selectAllByCategory(int categoryId,int page){
+    public List<ProductMainVO> selectAllByCategory(int categoryId,int lastProductId){
     	Map<String, Object> params = new HashMap<>();
         params.put("category_id", categoryId);
         params.put("limit", 10);
-    	params.put("offset", 10*(page-1));
+    	params.put("last_id", lastProductId);
     	return jdbc.query(ProductSqls.SELECT_ALL_BY_CATEGORY,params,mainVORowMapper);
     }
     

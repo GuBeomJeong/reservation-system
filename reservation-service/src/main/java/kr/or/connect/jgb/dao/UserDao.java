@@ -45,7 +45,7 @@ public class UserDao {
         
         params.put("email", email);
  
-        return jdbc.queryForObject(UserSqls.SELECT_BY_EMAIL,params,Integer.class);
+        return jdbc.queryForObject(UserSqls.COUNT_BY_EMAIL,params,Integer.class);
     }
     
 
