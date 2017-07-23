@@ -4,6 +4,6 @@ import kr.or.connect.jgb.domain.Users;
 import kr.or.connect.jgb.domain.dto.NaverLoginUserInfo;
 
 public interface UserService {
-	public boolean isRegistration(String email);
-	public int addUser(NaverLoginUserInfo userInfo);
+	public boolean isRegistered(String email);
+	public Users addNaverUser(NaverLoginUserInfo userInfo);
 }

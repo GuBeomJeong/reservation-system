@@ -82,22 +82,7 @@ public class Users {
 		this.modifyDate = modifyDate;
 	}
 	
-	public void saveUserInfo(NaverLoginUserInfo userInfo) {
-		this.username = userInfo.getName();
-		this.email = userInfo.getEmail();
-		this.nickname= userInfo.getNickname();
-		this.adminFlag = 0;
-		this.tel = "";
-		this.createDate = "2017-07-20";
-		this.modifyDate = "2017-07-20";
-		
-        int i =this.email.indexOf("@"); 
-       
-        this.snsId = this.email.substring(0,i);
-        this.snsType="naver";
-        this.snsProfile = userInfo.getProfileImage();
-		
-	}
+
 	
 
 }

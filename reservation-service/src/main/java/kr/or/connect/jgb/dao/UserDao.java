@@ -42,9 +42,7 @@ public class UserDao {
         
     public int checkUser(String email){
         Map<String, Object> params = new HashMap<>();
-        
         params.put("email", email);
- 
         return jdbc.queryForObject(UserSqls.COUNT_BY_EMAIL,params,Integer.class);
     }
     

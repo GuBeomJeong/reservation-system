@@ -14,8 +14,11 @@ import kr.or.connect.jgb.service.FileService;
 @RestController
 @RequestMapping("/api/files")
 public class FileApiController {
-	@Autowired
+	
 	FileService fileService;
 	
-	
+	@Autowired
+	FileApiController(FileService fileService){
+		this.fileService = fileService;
+	}
 }

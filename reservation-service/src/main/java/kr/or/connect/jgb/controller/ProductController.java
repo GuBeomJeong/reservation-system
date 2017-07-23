@@ -22,8 +22,13 @@ import kr.or.connect.jgb.service.ProductService;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-	@Autowired
+	
 	private ProductService productService;
+	
+	@Autowired
+	ProductController(ProductService productService){
+		this.productService = productService;
+	}
 	
 	@GetMapping("/{id}")
 	public String detail(Model model,@PathVariable int id) {

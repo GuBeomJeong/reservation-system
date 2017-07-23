@@ -23,8 +23,13 @@ import kr.or.connect.jgb.service.CategoryService;
 @Controller
 @RequestMapping("/")
 public class MainController {
-	@Autowired
+	
 	private CategoryService categoryService;
+	
+	@Autowired
+	MainController(CategoryService categoryService){
+		this.categoryService = categoryService;
+	}
 	
 	@GetMapping("/category")
 	public String catergory(Model model) {

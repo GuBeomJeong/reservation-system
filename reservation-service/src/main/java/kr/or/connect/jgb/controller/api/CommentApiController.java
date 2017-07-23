@@ -16,8 +16,15 @@ import kr.or.connect.jgb.service.FileService;
 @RestController
 @RequestMapping("/api/comments")
 public class CommentApiController {
-	@Autowired
+	
 	CommentService commentService;
+
+	@Autowired
+	public CommentApiController(CommentService commentService) {
+		this.commentService = commentService;
+	}
+	
+	
 	
 	
 }

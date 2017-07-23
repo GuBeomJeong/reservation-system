@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -34,21 +35,25 @@ import kr.or.connect.jgb.service.UserService;
 @RequestMapping("/login")
 public class LoginController {
 	private UserService userService;
-	
+
 	@Autowired
 	LoginController(UserService userService){
 		this.userService = userService;
 	}
 	
-	private final String clientId = "vpxjnGcgMhasKc_aH1HK";
-	private final String clientSecret = "szd9Gy5y7V";
+	@Value("${spring.naverlogin.clientId}")
+	private String clientId;
+	 
+	@Value("${spring.naverlogin.clientSecret}")
+	private String clientSecret;
+	
 	private final String requestURL = "https://nid.naver.com/oauth2.0/authorize?";
 	private final String tokenURL = "https://nid.naver.com/oauth2.0/token?";
 	private final String callbackURL = "http://localhost:8080/login/callback";
 	private final String profileURL = "https://openapi.naver.com/v1/nid/me";
 	
 	@GetMapping
-	public String login(Model model,HttpServletRequest request) throws UnsupportedEncodingException {
+	public String naverLogin(Model model,HttpServletRequest request) throws UnsupportedEncodingException {
 		
 		if(request.getSession().getAttribute("userInfo") == null) {
 			String state = generateState();
@@ -74,7 +79,7 @@ public class LoginController {
 	}
 	
 	@GetMapping("/callback")
-	public String callback(
+	public String naverCallback(
 			@RequestParam(value="code",required=false) String code, 
 			@RequestParam("state") String state,
 			Model model,HttpServletRequest request) {
@@ -100,10 +105,10 @@ public class LoginController {
 			NaverLoginUserInfo userInfo = response.getBody().getResponse();
 			System.out.println(userInfo);
 			
-			if(userService.isRegistration(userInfo.getEmail())) {
+			if(userService.isRegistered(userInfo.getEmail())) {
 				
 			}else {
-				userService.addUser(userInfo);
+				userService.addNaverUser(userInfo);
 			}
 			
 			session.setAttribute("userInfo",userInfo);
