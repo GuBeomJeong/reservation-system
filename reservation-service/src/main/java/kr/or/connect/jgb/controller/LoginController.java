@@ -91,7 +91,6 @@ public class LoginController {
 					+"&code="+code;
 			RestTemplate restTemplate = new RestTemplate();
 			NaverLoginUserToken userToken = restTemplate.getForObject(URL, NaverLoginUserToken.class);
-			System.out.println(userToken.getAccessToken());
 						
 			HttpHeaders header = new HttpHeaders(); 
 			header.set("Authorization", "Bearer " + userToken.getAccessToken());

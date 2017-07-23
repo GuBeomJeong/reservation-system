@@ -17,8 +17,5 @@ public class FileApiController {
 	@Autowired
 	FileService fileService;
 	
-	@GetMapping("/products/{productId}")
-	public List<Integer> files(@PathVariable int productId){
-		return fileService.getByProduct(productId);
-	}
+	
 }

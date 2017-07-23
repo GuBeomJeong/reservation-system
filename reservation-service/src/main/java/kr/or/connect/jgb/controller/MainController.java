@@ -35,7 +35,7 @@ public class MainController {
 	}
 	
 	@PostMapping("/category")
-    public String create(@ModelAttribute(name="name") String name) {
+    public String create(@RequestParam String name) {
         Category category = new Category(name);
         categoryService.addCategory(category);
         return "redirect:/category";

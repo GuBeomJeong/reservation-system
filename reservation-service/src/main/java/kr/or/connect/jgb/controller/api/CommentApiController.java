@@ -19,8 +19,5 @@ public class CommentApiController {
 	@Autowired
 	CommentService commentService;
 	
-	@GetMapping("/products/{productId}")
-	public List<CommentVO> comments(@PathVariable int productId){
-		return commentService.getThreeByProduct(productId);
-	}
+	
 }

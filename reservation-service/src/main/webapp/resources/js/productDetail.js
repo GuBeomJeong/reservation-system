@@ -106,7 +106,7 @@ var ProductDetail = (function(){
     }
 
     function loadCommentShort(){
-        var URL = "http://localhost:8080/api/comments/products/"+productId;
+        var URL = "http://localhost:8080/api/products/"+productId+"/comments";
 
         $.ajax({
             url : URL,

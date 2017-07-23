@@ -91,23 +91,17 @@ public class FileController {
         return "redirect:/files";
     }
 
-    // files/dbPk값 을 받아들여서 다운로드 하도록 한다.
-    // 여기에서는 db에서 읽어들였다는 것을 가정하고 프로그래밍한다.
     @GetMapping(path="/{id}")
     public void downloadReservationUserCommentImage(
             @PathVariable(name="id") int id,
             HttpServletResponse response
-    ){
-        // id를 이용하여 파일의 정보를 읽어온다.
-        // 이 부분은 원래 db에서 읽어오는 것인데 db부분은 생략했다.
-    	
-    	
+    ){ 	
     	Files file = fileService.get(id);
     	
         String originalFilename = file.getFileName();
         String contentType = file.getContentType();
         int fileSize = file.getFileLength();
-        // 해당 파일이 이미 존재해야한다.
+        
         String saveFileName = file.getSaveFileName();
 
         response.setHeader("Content-Disposition", "inline; filename=\"" + originalFilename + "\";");

@@ -47,10 +47,10 @@ var ReservationMain = (function () {
     function loadProductsByCategory(){
         scrollLock =1;
         if(categoryId){
-            var URL = "http://localhost:8080/api/products/categories/"+categoryId+"/pages/"+lastProductId;
+            var URL = "http://localhost:8080/api/categories/"+categoryId+"/products?lastProductId="+lastProductId;
         }
         else{
-            var URL = "http://localhost:8080/api/products/pages/"+lastProductId;
+            var URL = "http://localhost:8080/api/products?lastProductId="+lastProductId;
         }
         $.ajax({
             url : URL,
