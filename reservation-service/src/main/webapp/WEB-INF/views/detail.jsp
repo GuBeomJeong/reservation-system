@@ -12,7 +12,7 @@
     <link href="/resources/css/style.css" rel="stylesheet">
 </head>
 
-<body id ="${id}">
+<body>
     <div id="container">
         <div class="header fade">
             <header class="header_tit">

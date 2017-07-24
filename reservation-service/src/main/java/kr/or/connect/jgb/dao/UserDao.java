@@ -40,10 +40,16 @@ public class UserDao {
         return insertAction.executeAndReturnKey(params).intValue();
     }
         
-    public int checkUser(String email){
+    public Integer checkUser(String email){
         Map<String, Object> params = new HashMap<>();
         params.put("email", email);
-        return jdbc.queryForObject(UserSqls.COUNT_BY_EMAIL,params,Integer.class);
+        return jdbc.queryForObject(UserSqls.SELECT_BY_EMAIL,params,Integer.class);
+    }
+    
+    public Users selectById(int id){
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        return jdbc.queryForObject(UserSqls.SELECT_BY_ID,params,rowMapper);
     }
     
 

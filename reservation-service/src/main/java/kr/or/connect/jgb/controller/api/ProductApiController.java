@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.or.connect.jgb.domain.vo.CommentVO;
 import kr.or.connect.jgb.domain.vo.ProductDetailVO;
 import kr.or.connect.jgb.domain.vo.ProductMainVO;
+import kr.or.connect.jgb.domain.vo.ProductReserveVO;
 import kr.or.connect.jgb.service.CommentService;
 import kr.or.connect.jgb.service.FileService;
 import kr.or.connect.jgb.service.ProductService;
@@ -60,6 +61,11 @@ public class ProductApiController {
 	@GetMapping("/{productId:[\\d]+}/files")
 	public List<Integer> files(@PathVariable int productId){
 		return fileService.getByProduct(productId);
+	}
+	
+	@GetMapping("/{productId:[\\d]+}/reserve")
+	public ProductReserveVO getReserve(@PathVariable int productId) {
+		return productService.getReserve(productId);
 	}
 
 	

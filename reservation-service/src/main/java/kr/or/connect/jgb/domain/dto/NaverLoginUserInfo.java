@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class NaverLoginUserInfo {
 	
+	private int userId;
 	private String email;
     private String nickname;
     @JsonProperty("profile_image")
@@ -13,8 +14,16 @@ public class NaverLoginUserInfo {
     private String id;
     private String name;
     private String birthday;
+    
+    public int getUserId() {
+		return userId;
+	}
 
-    public String getEmail() {
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getEmail() {
         return email;
     }
 

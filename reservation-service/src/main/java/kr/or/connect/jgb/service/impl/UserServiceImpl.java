@@ -19,19 +19,26 @@ public class UserServiceImpl implements UserService {
 	public UserServiceImpl(UserDao userDao) {
 	    this.userDao = userDao;
 	}
-
+	
+	
 	@Override
-	public boolean isRegistered(String email) {
-		if(userDao.checkUser(email)==1) {
-			return true;
+	public int isRegistered(String email) {
+		Integer id = userDao.checkUser(email);
+		if(id != null) {
+			return id;
 		}else {
-			return false;
-		}		
+			return 0;
+		}
+	
 	}
 
 	@Override
 	public Users addNaverUser(NaverLoginUserInfo userInfo) {
-		return saveUserInfo(userInfo);
+		Users user = saveUserInfo(userInfo);
+		int insert = userDao.insert(user);
+		user.setId(insert);
+		
+		return user;
 	}
 	
 	public Users saveUserInfo(NaverLoginUserInfo userInfo) {
@@ -50,6 +57,13 @@ public class UserServiceImpl implements UserService {
         
         return user;
 		
+	}
+
+
+	@Override
+	public Users get(int userId) {
+		
+		return userDao.selectById(userId);
 	}
 	
 	

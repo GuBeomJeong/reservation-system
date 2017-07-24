@@ -7,7 +7,7 @@ var ProductDetail = (function(){
     var commentImages =[
 
     ];
-    var productId = $('body').attr("id");
+    var productId = $(location).attr('href').split("/")[4];
 
     var commentImageSource = $("#comment_image_template").html();
     var commentImageTemplate = Handlebars.compile(commentImageSource);
@@ -238,6 +238,11 @@ var ProductDetail = (function(){
           $(".section_info_tab > .info_tab_lst").on("click","li > a",clickTabInfo);
 
           $(".section_store_details > .bk_more").on("click",clickMoreDetail);
+
+          $(".section_btn .bk_btn").on("click",function(){
+              var url = "http://localhost:8080/products/"+productId+"/reserve";
+              $(location).attr('href',url);
+          })
       },
       updateRollingCount : function(flag){
           flag ? rollingCount++:rollingCount--;

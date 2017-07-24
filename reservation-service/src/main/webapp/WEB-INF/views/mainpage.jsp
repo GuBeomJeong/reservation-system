@@ -165,6 +165,7 @@
 {{/item}}
 </script>
 
+
 <script src="/resources/js/libs/jquery.min.js"></script>
 <script src="/resources/js/libs/handlebars-v4.0.10.js"></script>
 

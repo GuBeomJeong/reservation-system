@@ -13,10 +13,31 @@ public class ProductDetailVO {
 	String homepage;
 	String event;
 	String content;
+	String salesFlag;
+	String salesStart;
+	String salesEnd;
 	List<Integer> filesId;
 	int commentCount;
 	double commentAverage;
-	
+		
+	public String getSalesFlag() {
+		return salesFlag;
+	}
+	public void setSalesFlag(String salesFlag) {
+		this.salesFlag = salesFlag;
+	}
+	public String getSalesStart() {
+		return salesStart;
+	}
+	public void setSalesStart(String salesStart) {
+		this.salesStart = salesStart;
+	}
+	public String getSalesEnd() {
+		return salesEnd;
+	}
+	public void setSalesEnd(String salesEnd) {
+		this.salesEnd = salesEnd;
+	}
 	public int getCommentCount() {
 		return commentCount;
 	}

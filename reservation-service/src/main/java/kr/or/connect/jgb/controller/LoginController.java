@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-
+import kr.or.connect.jgb.domain.Users;
 import kr.or.connect.jgb.domain.dto.NaverLoginUserInfo;
 import kr.or.connect.jgb.domain.dto.NaverLoginUserResult;
 import kr.or.connect.jgb.domain.dto.NaverLoginUserToken;
@@ -55,10 +55,11 @@ public class LoginController {
 	@GetMapping
 	public String naverLogin(Model model,HttpServletRequest request) throws UnsupportedEncodingException {
 		
-		if(request.getSession().getAttribute("userInfo") == null) {
+		if(request.getSession().getAttribute("user") == null) {
 			String state = generateState();
 		
 			request.getSession().setAttribute("state", state);
+			
 			
 			String URL = requestURL +
 					"client_id="+clientId+
@@ -105,13 +106,16 @@ public class LoginController {
 			NaverLoginUserInfo userInfo = response.getBody().getResponse();
 			System.out.println(userInfo);
 			
-			if(userService.isRegistered(userInfo.getEmail())) {
-				
+			int userId = userService.isRegistered(userInfo.getEmail());
+			Users user;
+			
+			if(userId !=0) {
+				user = userService.get(userId);
 			}else {
-				userService.addNaverUser(userInfo);
+				user = userService.addNaverUser(userInfo);
 			}
 			
-			session.setAttribute("userInfo",userInfo);
+			session.setAttribute("user",user);
 			
 		}
 		

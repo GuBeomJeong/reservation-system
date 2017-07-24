@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.connect.jgb.domain.Product;
 import kr.or.connect.jgb.domain.ProductImage;
+import kr.or.connect.jgb.domain.ProductPrice;
 import kr.or.connect.jgb.domain.vo.ProductDetailVO;
 import kr.or.connect.jgb.domain.vo.ProductMainVO;
 
@@ -29,7 +30,7 @@ public class ProductDao {
     private RowMapper<Product> rowMapper = BeanPropertyRowMapper.newInstance(Product.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
     private RowMapper<ProductMainVO> mainVORowMapper = BeanPropertyRowMapper.newInstance(ProductMainVO.class); 
     private RowMapper<ProductDetailVO> detailVORowMapper = BeanPropertyRowMapper.newInstance(ProductDetailVO.class); 
-
+    private RowMapper<ProductPrice> priceRowMapper = BeanPropertyRowMapper.newInstance(ProductPrice.class);
     
     
     public ProductDao(DataSource dataSource) {
@@ -88,5 +89,11 @@ public class ProductDao {
     	Map<String, Object> params = new HashMap<>();
         params.put("id", productId);
         return jdbc.queryForObject(ProductSqls.SELECT_DETAIL_BY_ID,params,detailVORowMapper);
+    }
+    
+    public List<ProductPrice> selectPriceByProductId(int productId) {
+    	Map<String, Object> params = new HashMap<>();
+        params.put("product_id", productId);
+    	return jdbc.query(ProductSqls.SELECT_PRICE_BY_PRODUCTID,params,priceRowMapper);
     }
 }

@@ -7,6 +7,7 @@ import kr.or.connect.jgb.domain.Product;
 import kr.or.connect.jgb.domain.ProductImage;
 import kr.or.connect.jgb.domain.vo.ProductDetailVO;
 import kr.or.connect.jgb.domain.vo.ProductMainVO;
+import kr.or.connect.jgb.domain.vo.ProductReserveVO;
 
 public interface ProductService {
 	public Product get(int id);
@@ -16,4 +17,5 @@ public interface ProductService {
     public ProductDetailVO getDetail(int productId);
     public int delete(int id);
     public int update(Product product);
+    public ProductReserveVO getReserve(int productId);
 }

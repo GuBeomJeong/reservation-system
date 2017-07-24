@@ -14,6 +14,7 @@ import kr.or.connect.jgb.domain.ProductImage;
 import kr.or.connect.jgb.domain.dto.CommentCountAvgDTO;
 import kr.or.connect.jgb.domain.vo.ProductDetailVO;
 import kr.or.connect.jgb.domain.vo.ProductMainVO;
+import kr.or.connect.jgb.domain.vo.ProductReserveVO;
 import kr.or.connect.jgb.service.ProductService;
 
 @Service
@@ -72,12 +73,28 @@ public class ProductServiceImpl implements ProductService {
 		ProductDetailVO detailVO = productDao.selectDetailById(productId);
 		detailVO.setfilesId(fileDao.selectByProduct(productId));
 		CommentCountAvgDTO CCA = commentDao.selectConuntAverageByProduct(productId);
-	
 		
 		detailVO.setCommentAverage(CCA.getAverage());
 		detailVO.setCommentCount(CCA.getCount());
 		
 		return detailVO;
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public ProductReserveVO getReserve(int productId) {
+		ProductDetailVO detailVO = productDao.selectDetailById(productId);
+		detailVO.setfilesId(fileDao.selectByProduct(productId));
+		
+		ProductReserveVO reserveVO = new ProductReserveVO();
+		reserveVO.setProductDetailVO(detailVO);
+		reserveVO.setProductPrice(productDao.selectPriceByProductId(productId));
+		
+		return reserveVO;
+		
+	}
+	
+	
+	
 	
 }

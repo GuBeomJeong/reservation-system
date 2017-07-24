@@ -1,5 +1,6 @@
 package kr.or.connect.jgb.controller;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +31,20 @@ public class ProductController {
 		this.productService = productService;
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/{id:[\\d]+}")
 	public String detail(Model model,@PathVariable int id) {
-		model.addAttribute("id", id);
 		return "detail";
+	}
+	
+	
+	@GetMapping("/{id:[\\d]+}/reserve")
+	public String reserve(HttpServletRequest request) {
+		if(request.getSession().getAttribute("user") == null) {
+			
+			return "redirect:/";
+		}else {
+			return "reserve";
+		}
+		
 	}
 }
